@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Slides</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            overflow: hidden;
+        }
+
+       .slide {
+    display: none;   /* keep this ONLY */
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 30px;
+}
+
+        .active {
+            display: flex;
+        }
+
+        button {
+            position: absolute;
+            bottom: 30px;
+            margin-left:600px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background: white;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        img {
+            width: 200px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Countdown -->
+<div class="slide active" id="countdownSlide" style="background-image:url('bb.jpg')">
+    I'll surprise you in...
+</div>
+
+<!-- Slide 2: Welcome -->
+<div class="slide" style="background-image:url('bb.jpg')">
+𝗠𝒂𝒚 𝒕𝒉𝒆 𝒕𝒉𝒊𝒔 𝒘𝒊𝒍𝒍 𝒃𝒆 𝒕𝒉𝒆 <br>𝒉𝒂𝒑𝒑𝒊𝒆𝒔𝒕 𝒃𝒊𝒓𝒕𝒉𝒅𝒂𝒚 𝒕𝒐 𝒚𝒐𝒖</div>
+
+<!-- Slide 3: Image + Text -->
+<div class="slide" style="background-image:url('bb.jpg')">
+    <div>𝙄’𝙢 𝙣𝙤𝙩 𝙨𝙪𝙧𝙚 𝙝𝙤𝙬 𝙩𝙤 𝙬𝙞𝙨𝙝 𝙮𝙤𝙪 𝙞𝙣 𝙥𝙚𝙧𝙨𝙤𝙣, <br>𝙨𝙞𝙣𝙘𝙚 𝙬𝙚’𝙧𝙚 𝙣𝙤𝙩 𝙩𝙝𝙖𝙩 𝙛𝙖𝙢𝙞𝙡𝙞𝙖𝙧, <br>𝙨𝙤 𝙄 𝙘𝙝𝙤𝙨𝙚 𝙩𝙝𝙞𝙨 𝙬𝙖𝙮 𝙩𝙤 𝙖𝙫𝙤𝙞𝙙 𝙖𝙣𝙮 𝙖𝙬𝙠𝙬𝙖𝙧𝙙𝙣𝙚𝙨𝙨.  <br>𝘽𝙪𝙩 𝙄 𝙨𝙩𝙞𝙡𝙡 𝙬𝙖𝙣𝙩𝙚𝙙 𝙩𝙤 𝙬𝙞𝙨𝙝 𝙮𝙤𝙪.<br>𝙊𝙣𝙘𝙚 𝙖𝙜𝙖𝙞𝙣, 𝙢𝙖𝙣𝙮 𝙢𝙤𝙧𝙚 𝙝𝙖𝙥𝙥𝙮 𝙧𝙚𝙩𝙪𝙧𝙣𝙨 𝙤𝙛 𝙩𝙝𝙚 𝙙𝙖𝙮 𝑮𝒂𝒏𝒆𝒔𝒉 💖 <br>  𝙆𝙚𝙚𝙥 𝙨𝙢𝙞𝙡𝙞𝙣𝙜 𝙖𝙣𝙙 𝙠𝙚𝙚𝙥 𝙨𝙝𝙞𝙣𝙞𝙣𝙜.   <br>𝙉𝙪𝙫𝙫𝙪 𝙣𝙖𝙫𝙫𝙞𝙩𝙚 𝙗𝙖𝙜𝙪𝙣𝙩𝙖𝙫 🙂</div>
+</div>
+
+<button onclick="nextSlide()">Next</button>
+
+<script>
+let current = 0;
+let slides = document.getElementsByClassName("slide");
+let count = 5;
+
+// START countdown automatically
+startCountdown();
+
+function startCountdown() {
+    updateCountdown();
+}
+
+function updateCountdown() {
+    let slide = document.getElementById("countdownSlide");
+
+    if (count > 0) {
+        slide.innerHTML = "I'll surprise you in......<br>" + count;
+        count--;
+        setTimeout(updateCountdown, 1000);
+    } else {
+        slide.innerHTML = "🎉 Surprise!";
+
+        setTimeout(() => {
+            goToSlide(1);
+            document.querySelector("button").style.display = "block";
+        }, 1000);
+    }
+}
+
+function goToSlide(index) {
+    slides[current].classList.remove("active");
+    current = index;
+    slides[current].classList.add("active");
+
+    // Hide button on last slide
+    if (current === slides.length - 1) {
+        document.querySelector("button").style.display = "none";
+    }
+}
+
+function nextSlide() {
+    if (current < slides.length - 1) {
+        goToSlide(current + 1);
+    }
+}
+</script>
+
+</body>
+</html>
